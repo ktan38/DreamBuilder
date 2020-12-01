@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+App.js is my parent component that contains a list of my 50 item cards, as well as a FilteredList. My list off cards is passed down to the FilteredList component.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FfilterdList is my component that contains all the logisc behind filtering, sorting, and aggregating. Its state contains the following:
 
-## Available Scripts
+        cost: indicates the state of the cost filter
+        position: indicates the state of the position filter
+        sort: indicates the state in which the cards are sorted
+        total: indicates the total aggregated cost of the players added to "My Team"
+        dict: a dictionary that maps players added to "My Team" to the amount added
 
-In the project directory, you can run:
+FilteredList contains Dropdown components from Bootstrap that handle the Filtering and Sorting, respecively. These Dropdowns point directly to the ffiltering and sorting functions written within FilteredList.
 
-### `yarn start`
+FilteredList also contains a DisplayList component and a DisplayAdded component
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+DisplayList is my component for displaying the 50 cards, which can be sorted and filterd. Two things are passed down from FilteredList and used as props in DisplayList: the list of 50 cards, filtered and sorted, and an
+"add" function. DisplayList contains all the details for how the card is structured and displayed. The reason why the add function is passed down here is because there is an add button on each card, for the user to add to their team.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+DisplayAdded is my component for displaying the cards in the user's team. The following properties are passed down from FilteredList:
 
-### `yarn test`
+        add: the add function that corresponds to the "plus" button
+        subtract: a function that subtracts a player from the team, corresponding to the "minus" button
+        remove: a function that removes a player from the team, regardless of how manny times the player has been added
+        dict: a dictionary representing all the players currently on the user's team, and the number of times each player appears on the user's team
+        list: a list of players filtered by whether they exist on the user's team
+        total: the total cost of the player's team
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+These properties are all needed for this section of the website, where the different buttons, cards, and displays all correspond to functions written in the FilteredList class.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    The plus button triggers the add property, which triggers the add function written in FilteredList, adding a player to the team
+    The minus button triggers the subtract property, which triggers the subtract function written in FilteredList, subtracting a player from the team
